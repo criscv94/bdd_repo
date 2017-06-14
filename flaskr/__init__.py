@@ -46,7 +46,7 @@ def home():
                   x["database"],
                   x["description"],
                   x["query"]) for x in json_file]
-        return render_template('templates/file.html', results=pairs)
+        return render_template('file.html', results=pairs)
 
 
 @app.route("/mongo")
@@ -55,7 +55,7 @@ def mongo():
     results = eval('mongodb.'+query)
     results = json_util.dumps(results, sort_keys=True, indent=4)
     if "find" in query:
-        return render_template('templates/mongo.html', results=results)
+        return render_template('mongo.html', results=results)
     else:
         return "ok"
 
@@ -67,7 +67,7 @@ def postgres():
     cursor.execute(query)
     results = [[a for a in result] for result in cursor]
     print(results)
-    return render_template('templates/postgres.html', results=results)
+    return render_template('postgres.html', results=results)
 
 
 @app.route("/example")
