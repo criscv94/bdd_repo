@@ -26,8 +26,8 @@ mongodb = client[MONGODATABASE]
 ''' # Uncomment for postgres connection
 # REPLACE WITH YOUR DATABASE NAME, USER AND PASS
 POSTGRESDATABASE = "mydatabase"
-POSTGRESUSER = "myuser"
-POSTGRESPASS = "mypass"
+POSTGRESUSER = "grupo12"
+POSTGRESPASS = "grupo12"
 postgresdb = psycopg2.connect(
     database=POSTGRESDATABASE,
     user=POSTGRESUSER,
@@ -72,7 +72,7 @@ def postgres():
 
 @app.route("/example")
 def example():
-    return render_template('templates/file.html')
+    return render_template('/var/www/flaskr/flaskr/templates/file.html')
 
 
 if __name__ == "__main__":
