@@ -72,7 +72,7 @@ def postgres():
 
 @app.route("/example")
 def example():
-    return render_template('/var/www/flaskr/flaskr/templates/file.html')
+    return render_template('file.html')
 
 
 if __name__ == "__main__":
