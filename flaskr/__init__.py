@@ -59,6 +59,30 @@ def mongo():
     else:
         return "ok"
 
+@app.route("/mongo_fecha")
+def mongo():
+    query = request.args.get("query")
+    query = "escuchas.find({{'fecha':'{0}'}})".format(query)
+    results = eval('mongodb.'+query)
+    results = json_util.dumps(results, sort_keys=True, indent=4)
+    return render_template('mongo.html', results=results)
+
+@app.route("/mongo_numero")
+def mongo():
+    query = request.args.get("query")
+    number, quantity = query.split(",")
+    query = "escuchas.find({{'numero':'{0}'}},{{'_id':1,'contenido':1,'fecha':1,'numero':1,'ciudad':1}}).sort('fecha',-1).limit({1})".format(number, quantity)
+    results = eval('mongodb.' + query)
+    results = json_util.dumps(results, sort_keys=True, indent=4)
+    return render_template('mongo.html', results=results)
+
+@app.route("/mongo_clave")
+def mongo():
+    query = request.args.get("query")
+    query = "escuchas.find({{'\$text':{{'\$search':'{0}}'}},{{'_id':1,'contenido':1,'fecha':1,'numero':1,'ciudad':1}})".format(query)
+    results = eval('mongodb.'+query)
+    results = json_util.dumps(results, sort_keys=True, indent=4)
+    return render_template('mongo.html', results=results)
 
 @app.route("/postgres")
 def postgres():
