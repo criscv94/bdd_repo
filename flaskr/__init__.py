@@ -79,8 +79,8 @@ def numero():
 @app.route("/mongo_clave")
 def clave():
     query = request.args.get("query")
-    query = "escuchas.find({{'$text':{{'$search':'{0}'}},{{'_id':1,'contenido':1,'fecha':1,'numero':1,'ciudad':1}})".format(query)
-    results = eval('mongodb.'+query)
+    query = "escuchas.find({{'$text':{{'$search':'{}'}},{{}})".format(query)
+    results = eval('mongodb.' + query)
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return render_template('mongo.html', results=results)
 
