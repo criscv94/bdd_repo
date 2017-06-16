@@ -60,7 +60,7 @@ def mongo():
         return "ok"
 
 @app.route("/mongo_fecha")
-def mongo():
+def fecha():
     query = request.args.get("query")
     query = "escuchas.find({{'fecha':'{0}'}})".format(query)
     results = eval('mongodb.'+query)
@@ -68,7 +68,7 @@ def mongo():
     return render_template('mongo.html', results=results)
 
 @app.route("/mongo_numero")
-def mongo():
+def numero():
     query = request.args.get("query")
     number, quantity = query.split(",")
     query = "escuchas.find({{'numero':'{0}'}},{{'_id':1,'contenido':1,'fecha':1,'numero':1,'ciudad':1}}).sort('fecha',-1).limit({1})".format(number, quantity)
@@ -77,7 +77,7 @@ def mongo():
     return render_template('mongo.html', results=results)
 
 @app.route("/mongo_clave")
-def mongo():
+def clave():
     query = request.args.get("query")
     query = "escuchas.find({{'\$text':{{'\$search':'{0}}'}},{{'_id':1,'contenido':1,'fecha':1,'numero':1,'ciudad':1}})".format(query)
     results = eval('mongodb.'+query)
